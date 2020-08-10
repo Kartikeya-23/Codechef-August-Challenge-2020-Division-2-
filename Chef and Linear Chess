@@ -1,0 +1,52 @@
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+    public static void main (String[] args) throws java.lang.Exception
+    {
+        // your code goes here
+        Scanner sc = new Scanner(System.in);
+        try {
+            int t = sc.nextInt();
+            for (int a = 0; a < t; a++) {
+                int N = sc.nextInt();
+                int K = sc.nextInt();
+                int[] arr = new int[N];
+                for (int i = 0; i < N; i++) {
+                    arr[i] = sc.nextInt();
+                }
+                int minJump = Integer.MAX_VALUE;
+                int result = -1;
+                boolean hasConquer = false;
+                for (int i = 0; i < N; i++) {
+                    int jump = 0;
+                    int temp = arr[i];
+                    hasConquer = false;
+                    while (temp <= K) {
+                        temp = temp + arr[i];
+                        jump++;
+                        if (temp == K) {
+                            hasConquer = true;
+                            break;
+                        }
+                    }
+                    if(hasConquer) {
+                        if (jump < minJump) {
+                            minJump = jump;
+                            result = arr[i];
+                        }
+                    }
+                }
+                System.out.println(result);
+            }
+
+        } catch (Exception e) {
+            return;
+        }
+    }
+}
