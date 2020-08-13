@@ -1,0 +1,87 @@
+/* package codechef; // don't place package name! */
+
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef {
+
+    public static int noOfDigit(int number) {
+        int count = 0;
+        while (number > 0) {
+            number /= 10;
+            count++;
+        }
+        return count;
+    }
+
+    public static void main(String[] args) throws java.lang.Exception {
+        // your code goes here
+        Scanner sc = new Scanner(System.in);
+        try {
+            int t = sc.nextInt();
+            for (int a = 0; a < t; a++) {
+                int pc = sc.nextInt();
+                int pr = sc.nextInt();
+                int diffOfDivisor = (pc / 9) - (pr / 9);
+                if (diffOfDivisor < 0) {
+                    diffOfDivisor = -diffOfDivisor;
+                }
+                int diff = (pc - pr);
+                if (diff < 0) {
+                    diff = -diff;
+                }
+                int chefWin = 0;
+                int rickWin = 1;
+                int noOfIntegerGeneratedByChef = (int) Math.ceil((double)pc / 9);
+                int noOfIntegerGeneratedByRick = (int) Math.ceil((double)pr / 9);
+                int nodoc = noOfDigit(pc);
+                int nodor = noOfDigit(pr);
+                while (true) {
+                    if (diff > 9) {
+                        if (pc < pr) {
+                            System.out.println(chefWin + " " + noOfIntegerGeneratedByChef);
+                            break;
+                        } else {
+                            System.out.println(rickWin + " " + noOfIntegerGeneratedByRick);
+                            break;
+                        }
+                    } else if (pc % 9 == 0 && pr % 9 == 0) {
+                        if (pc < pr) {
+                            System.out.println(chefWin + " " + noOfIntegerGeneratedByChef);
+                            break;
+                        } else {
+                            System.out.println(rickWin + " " + noOfIntegerGeneratedByRick);
+                            break;
+                        }
+                    } else if (pc % 9 != 0 && pr % 9 != 0 && diffOfDivisor == 0) {
+                        System.out.println(rickWin + " " + noOfIntegerGeneratedByRick);
+                        break;
+                    } else {
+                        if (pc % 9 == 0 && pr > pc) {
+                            System.out.println(chefWin + " " + noOfIntegerGeneratedByChef);
+                            break;
+                        } else if (pc % 9 != 0 && pr % 9 != 0 && diffOfDivisor == 1) {
+                            if (pc < pr) {
+                                System.out.println(chefWin + " " + noOfIntegerGeneratedByChef);
+                                break;
+                            } else {
+                                System.out.println(rickWin + " " + noOfIntegerGeneratedByRick);
+                                break;
+                            }
+                        } else  {
+                            System.out.println(rickWin + " " + noOfIntegerGeneratedByRick);
+                            break;
+                        }
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+            return;
+        }
+    }
+}
